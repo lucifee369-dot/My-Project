@@ -139,7 +139,7 @@ body{
     transition: background-color 0.3s;
 }
 
-#taskStats {
+#taskStats{
     display: flex;
     justify-content: space-between;
     margin: 20px 0;
@@ -150,7 +150,13 @@ body{
 }
 
 #totalTask,
-#completedTask {
+#completedTask{
     margin: 0;
     font-size: 0.9rem;
+}
+
+
+#taskFilters button.active {
+    background-color: hsl(239, 84%, 67%);
+    color: whitesmoke;
 }

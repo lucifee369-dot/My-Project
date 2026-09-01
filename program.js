@@ -4,6 +4,9 @@ const myLabel = document.getElementById( "myLabel");
 const taskContainer = document.getElementById("taskContainer");
 const totalTask = document.getElementById("totalTask");
 const completedTask = document.getElementById("completedTask");
+const allBtn = document.getElementById("allBtn");
+const activeBtn = document.getElementById("activeBtn");
+const completedBtn = document.getElementById("completedBtn");
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
@@ -109,6 +112,8 @@ function createTask (taskData) {
             completedTaskCount--;
         }
 
+        completedTask.textContent = `Completed Task: ${completedTaskCount}`;
+
         if(taskData.saved) {
 
             const index = tasks.indexOf(taskData);
@@ -159,10 +164,55 @@ function createTask (taskData) {
     taskContainer.appendChild(taskDiv);
 }
 
-tasks.forEach(function (task){
-    task.saved = true;
-    createTask(task);
-});
+function showTasks(filter) {
+
+    taskContainer.innerHTML = "";
+
+    tasks.forEach(function (task) {
+
+        if (filter === "all"){
+            createTask(task);
+        }
+        else if (filter === "active" && !task.completed) {
+            createTask(task);
+        }
+        else if (filter === "completed" && task.completed) {
+            createTask(task);
+        }
+    });
+
+}
+
+allBtn.onclick = function() {
+    showTasks("all");
+
+    allBtn.classList.add("active");
+    activeBtn.classList.remove("active");
+    completedBtn.classList.remove("active");
+}
+
+activeBtn.onclick = function() {
+    showTasks("active");
+    
+    allBtn.classList.remove("active");
+    activeBtn.classList.add("active");
+    completedBtn.classList.remove("active");
+}
+
+completedBtn.onclick = function() {
+    showTasks("completed");
+
+    allBtn.classList.remove("active");
+    activeBtn.classList.remove("active");
+    completedBtn.classList.add("active");
+}
+
+showTasks("all");
+
+//tasks.forEach(function (task){
+    //task.saved = true;
+    // createTask(task);
+//});
 
 addBtn.onclick = function() {
     if (myInput.value.trim() === ""){

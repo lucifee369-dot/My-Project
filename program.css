@@ -1,0 +1,126 @@
+body{
+    background-color: hsl(0, 0%, 7%);
+    color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (max-width: 600px) {
+    #todoApp{
+        width: 90%;
+        margin: 40px auto;
+    }
+}
+
+#todoApp{
+    width: 500px;
+    margin: 80px auto;
+}
+
+#myH1{
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#inputArea{
+    display: flex;
+    gap: 10px;
+}
+
+#myInput{
+    flex: 1;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid hsl(0, 11%, 33%);
+    border-radius: 8px;
+    background-color: hsl(0, 0%, 12%);
+    color: whitesmoke;
+    outline: none;
+}
+
+#myInput:focus{
+    border-color: #6366f1;
+}
+
+#addBtn{
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: hsl(239, 84%, 67%);
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+#myLabel{
+    margin-top: 8px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: hsl(0, 70%, 60%);
+}
+
+#taskContainer{
+    margin-top: 20px;
+}
+
+.taskDiv{
+    display: flex;
+    align-items: center;
+    background-color: hsl(0, 0%, 12%);
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid hsl(0, 0%, 20%);
+    border-radius: 8px;
+}
+
+.task {
+    flex: 1;
+    margin: 0;
+    font-size: 1rem;
+    color: whitesmoke;
+}
+.editBtn{
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: hsl(220, 70%, 50%);
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.doneBtn{
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: hsl(140, 50%, 40%);
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.deleteBtn{
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: hsl(0, 60%, 45%);
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.editBtn:hover{
+    background-color: hsl(220, 70%, 60%);
+}
+
+.doneBtn:hover{
+    background-color: hsl(140, 50%, 50%);
+}
+
+.deleteBtn:hover{
+    background-color: hsl(0, 60%, 55%);
+}
+
+.editBtn,
+.doneBtn,
+.deleteBtn{
+    margin-left: 5px;
+    transition: background-color 0.3s;
+}

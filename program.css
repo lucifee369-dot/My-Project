@@ -139,7 +139,7 @@ body{
     transition: background-color 0.3s;
 }
 
-#taskCount {
+#taskStats {
     display: flex;
     justify-content: space-between;
     margin: 20px 0;

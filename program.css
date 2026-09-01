@@ -88,6 +88,15 @@ body{
     cursor: pointer;
 }
 
+.saveBtn{
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: hsl(200, 70%, 50%);
+    color: whitesmoke;
+    cursor: pointer;
+}
+
 .doneBtn{
     padding: 6px 10px;
     border: none;
@@ -110,6 +119,10 @@ body{
     background-color: hsl(220, 70%, 60%);
 }
 
+.saveBtn:hover{
+    background-color: hsl(200, 70%, 60%);
+}
+
 .doneBtn:hover{
     background-color: hsl(140, 50%, 50%);
 }
@@ -119,8 +132,25 @@ body{
 }
 
 .editBtn,
+.saveBtn,
 .doneBtn,
 .deleteBtn{
     margin-left: 5px;
     transition: background-color 0.3s;
+}
+
+#taskCount {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding: 12px 15px;
+    background-color: hsl(0, 0%, 12%);
+    border: 1px solid hsl(0, 0%, 20%);
+    border-radius: 8px;
+}
+
+#totalTask,
+#completedTask {
+    margin: 0;
+    font-size: 0.9rem;
 }

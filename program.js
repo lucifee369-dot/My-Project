@@ -4,9 +4,11 @@ const myLabel = document.getElementById( "myLabel");
 const taskContainer = document.getElementById("taskContainer");
 const totalTask = document.getElementById("totalTask");
 const completedTask = document.getElementById("completedTask");
+const searchInput = document.getElementById("searchInput");
 const allBtn = document.getElementById("allBtn");
 const activeBtn = document.getElementById("activeBtn");
 const completedBtn = document.getElementById("completedBtn");
+const clearCompletedBtn = document.getElementById("clearCompleted");
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
@@ -16,6 +18,12 @@ let completedTaskCount = tasks.filter(task => task.completed).length;
 
 totalTask.textContent = `Total Task: ${totalTaskCount}`;
 completedTask.textContent = `Completed Task: ${completedTaskCount}`;
+
+searchInput.addEventListener("input", function(){
+    const searchText = searchInput.value;
+
+        showTasks("all", searchText);
+});
 
 function createTask (taskData) {
 
@@ -164,11 +172,15 @@ function createTask (taskData) {
     taskContainer.appendChild(taskDiv);
 }
 
-function showTasks(filter) {
+function showTasks(filter, searchText = "") {
 
     taskContainer.innerHTML = "";
 
     tasks.forEach(function (task) {
+
+        if(!task.text.toLowerCase().includes(searchText.toLowerCase())) {
+            return;
+        }
 
         if (filter === "all"){
             createTask(task);
@@ -184,7 +196,7 @@ function showTasks(filter) {
 }
 
 allBtn.onclick = function() {
-    showTasks("all");
+    showTasks("all", searchInput.value);
 
     allBtn.classList.add("active");
     activeBtn.classList.remove("active");
@@ -192,7 +204,7 @@ allBtn.onclick = function() {
 }
 
 activeBtn.onclick = function() {
-    showTasks("active");
+    showTasks("active", searchInput.value);
     
     allBtn.classList.remove("active");
     activeBtn.classList.add("active");
@@ -200,7 +212,7 @@ activeBtn.onclick = function() {
 }
 
 completedBtn.onclick = function() {
-    showTasks("completed");
+    showTasks("completed", searchInput.value);
 
     allBtn.classList.remove("active");
     activeBtn.classList.remove("active");
@@ -209,10 +221,29 @@ completedBtn.onclick = function() {
 
 showTasks("all");
 
-//tasks.forEach(function (task){
-    //task.saved = true;
-    // createTask(task);
-//});
+clearCompletedBtn.onclick = function() {
+
+        const remainingTask = tasks.filter(function(task){
+        return task.completed !== true;
+
+    });
+
+    tasks = remainingTask;
+
+    completedTaskCount = tasks.filter(function(task){
+        return task.completed === true;
+    }).length;
+
+    completedTask.textContent = `Completed Task: ${completedTaskCount}`;
+
+    totalTaskCount = tasks.length;
+
+    totalTask.textContent = `Total Task: ${totalTaskCount}`;
+
+    localStorage.setItem("tasks",JSON.stringify(tasks));
+
+    showTasks("all",searchInput.value);
+}
 
 addBtn.onclick = function() {
     if (myInput.value.trim() === ""){

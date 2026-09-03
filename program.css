@@ -155,8 +155,81 @@ body{
     font-size: 0.9rem;
 }
 
+#searchArea{
+    margin-top: 20px;
+}
+
+#searchInput{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid hsl(0, 11%, 33%);
+    border-radius: 8px;
+    background-color: hsl(0, 0%, 12%);
+    color: whitesmoke;
+    outline: none;
+}
+
+#searchInput:focus{
+    border-color: #6366f1;
+}
+
+#searchInput::placeholder{
+    color: hsl(0, 0%, 55%);
+}
+
+#taskFilters{
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#taskFilters button{
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    background-color: hsl(0, 0%, 20%);
+    color: whitesmoke;
+    cursor: pointer;
+    transition: backgroun-color 0.3s;
+}
+
+#taskFilters button:hover{
+    background-color: hsl(0, 0%, 28%);
+}
 
 #taskFilters button.active {
     background-color: hsl(239, 84%, 67%);
+}
+
+#clearCompleted,
+#clearAllTasksBtn{
+    padding: 9px 14px;
+    margin-top: 5px;
+    margin-right: 5px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 6px;
     color: whitesmoke;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#clearCompleted{
+    background-color: hsl(35, 80%, 45%);
+}
+
+#clearCompleted:hover{
+    background-color: hsl(35, 80%, 55%);
+}
+
+#clearAllTasksBtn{
+    background-color: hsl(0, 60%, 45%);
+}
+
+#clearAllTasksBtn:hover{
+    background-color: hsl(0, 60%, 55%);
 }

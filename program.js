@@ -1,6 +1,6 @@
 const myInput = document.getElementById("myInput");
-const addBtn = document.getElementById( "addBtn");
-const myLabel = document.getElementById( "myLabel");
+const addBtn = document.getElementById("addBtn");
+const myLabel = document.getElementById("myLabel");
 const taskContainer = document.getElementById("taskContainer");
 const totalTask = document.getElementById("totalTask");
 const completedTask = document.getElementById("completedTask");
@@ -9,6 +9,7 @@ const allBtn = document.getElementById("allBtn");
 const activeBtn = document.getElementById("activeBtn");
 const completedBtn = document.getElementById("completedBtn");
 const clearCompletedBtn = document.getElementById("clearCompleted");
+const clearAllTasksBtn = document.getElementById("clearAllTasksBtn");
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
@@ -18,6 +19,10 @@ let completedTaskCount = tasks.filter(task => task.completed).length;
 
 totalTask.textContent = `Total Task: ${totalTaskCount}`;
 completedTask.textContent = `Completed Task: ${completedTaskCount}`;
+
+tasks.forEach(function(task) {
+    task.saved = true;
+});
 
 searchInput.addEventListener("input", function(){
     const searchText = searchInput.value;
@@ -58,8 +63,8 @@ function createTask (taskData) {
         if(editBtn.textContent === "Edit"){
 
             myInput.value = task.textContent;
-            editBtn.textContent = "Save";
 
+            editBtn.textContent = "Save";
         }
         else{
 
@@ -68,9 +73,10 @@ function createTask (taskData) {
             }
 
             taskData.text = myInput.value;
-            taskData.completed = false;
 
             task.textContent = myInput.value;
+
+            doneBtn.textContent = "Done";
             task.style.textDecoration = "none";
 
             editBtn.textContent = "Edit";
@@ -223,26 +229,48 @@ showTasks("all");
 
 clearCompletedBtn.onclick = function() {
 
+    if (confirm("Are you sure! ,You want to clear your Completed Task")) {
+
         const remainingTask = tasks.filter(function(task){
         return task.completed !== true;
 
-    });
+        });
 
-    tasks = remainingTask;
+        tasks = remainingTask;
 
-    completedTaskCount = tasks.filter(function(task){
-        return task.completed === true;
-    }).length;
+        completedTaskCount = tasks.filter(function(task){
+            return task.completed === true;
+        }).length;
 
-    completedTask.textContent = `Completed Task: ${completedTaskCount}`;
+        completedTask.textContent = `Completed Task: ${completedTaskCount}`;
 
-    totalTaskCount = tasks.length;
+        totalTaskCount = tasks.length;
 
-    totalTask.textContent = `Total Task: ${totalTaskCount}`;
+        totalTask.textContent = `Total Task: ${totalTaskCount}`;
 
-    localStorage.setItem("tasks",JSON.stringify(tasks));
+        localStorage.setItem("tasks",JSON.stringify(tasks));
 
-    showTasks("all",searchInput.value);
+        showTasks("all",searchInput.value);
+
+    }
+
+}
+
+clearAllTasksBtn.onclick = function() {
+
+    if (confirm("Are you sure!, You want to clear your all tasks")) {
+
+        tasks = [];
+
+        localStorage.setItem("tasks",JSON.stringify(tasks));
+
+        totalTask.textContent = "Total Task: 0";
+        completedTask.textContent = "Completed Task: 0";
+
+        taskContainer.innerHTML = "";
+    }
+
+
 }
 
 addBtn.onclick = function() {

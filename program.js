@@ -76,9 +76,6 @@ function createTask (taskData) {
 
             task.textContent = myInput.value;
 
-            doneBtn.textContent = "Done";
-            task.style.textDecoration = "none";
-
             editBtn.textContent = "Edit";
             myInput.value = "";
 
@@ -261,6 +258,9 @@ clearAllTasksBtn.onclick = function() {
     if (confirm("Are you sure!, You want to clear your all tasks")) {
 
         tasks = [];
+
+        totalTaskCount = 0;
+        completedTaskCount = 0;
 
         localStorage.setItem("tasks",JSON.stringify(tasks));
 
